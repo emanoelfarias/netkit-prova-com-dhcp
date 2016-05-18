@@ -1,0 +1,35 @@
+#configuracao ips
+
+ifconfig eth0 168.243.129.130/26
+
+ifconfig eth1 168.243.129.210/29
+
+ifconfig eth2 168.243.129.229/30
+
+ifconfig eth3 168.243.129.225/30
+
+#DNS
+
+echo "nameserver 8.8.8.8" >> /etc/resolv.c
+
+#configuracao rotas
+
+route add default gw 168.243.129.230 #gateway padrao
+
+
+route add -net 168.243.129.192/28 gw 168.243.129.230 #rede5
+
+route add -net 168.243.128.0/24 gw 168.243.129.230 #rede6
+
+route add -net 168.243.129.0/25 gw 168.243.129.226 #rede7
+
+route add -net 168.243.129.216/29 gw 168.243.129.226 #rede8
+
+
+
+#DHCP
+
+/etc/init.d/dhcp3-server start
+
+
+

@@ -1,0 +1,45 @@
+#interface nat
+
+sysctl -w net.ipv4.ip forward=1
+iptables -t nat -A POSTROUTING -j MASQUERADE
+
+
+#DNS
+
+echo "nameserver 8.8.8.8" >> /etc/resolv.c
+
+
+#configuracao ips
+
+ifconfig eth0 168.243.129.230/30
+
+ifconfig eth1 168.243.129.194/28
+
+ifconfig eth2 168.243.128.2/24
+
+#configuracao rotas
+
+
+route add default gw 172.16.0.2 #gateway padrao INTERNET
+
+route add -net 168.243.129.128/26 gw 168.243.129.229 #rede1
+
+route add -net 168.243.129.208/29 gw 168.243.129.229 #rede2
+
+route add -net 168.243.129.224/30 gw 168.243.129.229 #rede3
+
+route add -net 168.243.129.0/25 gw 168.243.129.229 #rede7
+
+route add -net 168.243.129.216/24 gw 168.243.129.229 #rede8
+
+
+#DHCP
+
+/etc/init.d/dhcp3-server start
+
+
+
+
+
+
+
